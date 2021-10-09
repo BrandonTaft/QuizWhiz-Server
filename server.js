@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const salt = 10
 
+require('dotenv').config()
+
 app.use(cors())
 app.use(express.json())
 
