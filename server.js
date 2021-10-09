@@ -16,15 +16,14 @@ app.use(express.json())
 
 app.post('/api/register', async (req, res) => {
 
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
+    
     const userName = req.body.userName
     const password = req.body.password
     const token = req.body.token
 
     const persistedUser = await models.Users.findOne({
         where: {
-            userName: userName
+            name: userName
         }
     })
 
@@ -35,7 +34,7 @@ app.post('/api/register', async (req, res) => {
                 res.json({ message: "Something Went Wrong!!!" })
             } else {
                 const user = models.Users.build({
-                    userName: userName,
+                    name: userName,
                     password: hash,
                     token: token
                 })
