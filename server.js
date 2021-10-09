@@ -80,6 +80,8 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
+//***************************HIGH SCORE***************************//
+
 app.get('/api/highscore', (req, res) => {
         models.Users.findAll({
             raw:true,
