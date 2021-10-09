@@ -4,6 +4,8 @@ const cors = require('cors')
 const app = express()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const  sequelize = require('sequelize')
+
 const salt = 10
 
 require('dotenv').config()
@@ -59,15 +61,15 @@ app.post('/api/login', async (req, res) => {
 
     let user = await models.Users.findOne({
         where: {
-            userName : userName,
+            name : userName,
         }
     })
 
     if (user != null) {
         bcrypt.compare(password, user.password, (error, result) => {
             if (result) {
-                const token = jwt.sign({ name:name }, "SECRETKEY")
-                res.json({ success: true, token: token, name:name, user_id:user.id})
+                const token = jwt.sign({ name:userName }, "SECRETKEY")
+                res.json({ success: true, token: token, name:userName, user_id:user.id})
             } else {
                 res.json({ success: false, message: 'Not Authenticated' })
             }
@@ -78,20 +80,20 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
-app.get('/api/users', (req, res) => {
-        models.Things.findAll({
+app.get('/api/highscore', (req, res) => {
+        models.Users.findAll({
             raw:true,
             limit:10,
             order: [
-                sequelize.fn('max', sequelize.col('score'))
+                sequelize.fn('max', sequelize.col('high_score'))
             ],
            
             
           //  [['score', 'Desc']]
         })
-            .then(things => {
-                res.json(things)
-                console.log(things)
+            .then(high_Score => {
+                res.json(high_Score)
+                console.log(high_Score)
             })
     
         })
