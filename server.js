@@ -84,8 +84,9 @@ app.get('/api/highscore', (req, res) => {
         models.Users.findAll({
             raw:true,
             limit:10,
+            group:['high_score','Users.id'],
             order: [
-                sequelize.fn('max', sequelize.col('high_score'))
+                [sequelize.fn('max', sequelize.col('high_score')),'DESC']
             ],
            
             
