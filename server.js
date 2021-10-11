@@ -84,6 +84,7 @@ app.post("/api/login", async (req, res) => {
 //***************************HIGH SCORE***************************//
 
 app.get("/api/highscore", (req, res) => {
+  let leaderboard=[]
   models.Users.findAll({
     raw: true,
     limit: 10,
@@ -92,12 +93,18 @@ app.get("/api/highscore", (req, res) => {
 
     //  [['score', 'Desc']]
   }).then(high_Score => {
-    res.json(high_Score);
-    console.log(high_Score);
+    for (let i=0; i<10; i++){
+      if(high_Score[i]["name"]){
+        leaderboard.push({high_Score[i]["name"])
+      }
+      console.log(leaderboard)
+    }
+    //    res.json(high_Score);
+    //console.log(high_Score);
   });
 });
 
-//***************************Database connection***************************//
+//***************************Get questions***************************//
 
 app.get("/quiz", (req, res) => {
   let category = req.query["category"];
