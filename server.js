@@ -5,7 +5,7 @@ const app = express();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sequelize = require("sequelize");
-const axios = require('axios');
+const axios = require("axios");
 
 const salt = 10;
 
@@ -100,20 +100,29 @@ app.get("/api/highscore", (req, res) => {
 //***************************Database connection***************************//
 
 app.get("/quiz", (req, res) => {
-  let category = req.query["category"]
-  console.log(req.query["category"])
-  axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=medium&type=multiple`)
-  .then(response => response.data)
-  .then(result => {
-    console.log(result)
-  
-  })
-})
-
-
-
-
-
+  let category = req.query["category"];
+  if (category == 100) {
+    axios
+      .get(
+        `https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple`
+      )
+      .then(response => response.data)
+      .then(result => {
+        console.log(result);
+        res.json(result.results);
+      });
+  } else {
+    axios
+      .get(
+        `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=medium&type=multiple`
+      )
+      .then(response => response.data)
+      .then(result => {
+        console.log(result);
+        res.json(result.results);
+      });
+  }
+});
 
 //**************************Server Hosting**************************//
 app.listen(8080, () => {
