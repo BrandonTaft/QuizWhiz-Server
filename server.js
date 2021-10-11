@@ -134,11 +134,26 @@ app.get("/quiz", (req, res) => {
 //**************************Submit Score**************************//
 
 app.post("/api/submit", (req, res) => {
-  models.Users.update(req.body.username, {high_score: req.body.score})
-  .then((result) => {
-    console.log(result)
-  })
-})
+  console.log(req.body.username);
+  let user = models.Users.findOne({
+    where: {
+      name: req.body.username
+    }
+  });
+  console.log(user["high_score"])
+  console.log(req.body.score)
+  
+  if (user["high_score"] < req.body.score) {
+    models.Users.update(
+      { high_score: req.body.score },
+      { where: { name: req.body.username } }
+    ).then(result => {
+      console.log(result);
+    });
+  } else {
+    console.log("Better luck next time");
+  }
+});
 
 //**************************Server Hosting**************************//
 app.listen(8080, () => {
