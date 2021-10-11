@@ -84,7 +84,8 @@ app.post("/api/login", async (req, res) => {
 //***************************HIGH SCORE***************************//
 
 app.get("/api/highscore", (req, res) => {
-  let leaderboard=[]
+  let leaderboard = [];
+  let tempuser = {};
   models.Users.findAll({
     raw: true,
     limit: 10,
@@ -93,14 +94,13 @@ app.get("/api/highscore", (req, res) => {
 
     //  [['score', 'Desc']]
   }).then(high_Score => {
-    for (let i=0; i<10; i++){
-      if(high_Score[i]["name"]){
-        leaderboard.push({high_Score[i]["name"])
-      }
-      console.log(leaderboard)
+    for (let i = 0; i < 5; i++) {
+      leaderboard.push({
+        username: high_Score[i]["name"],
+        score: high_Score[i]["high_score"]
+      });
     }
-    //    res.json(high_Score);
-    //console.log(high_Score);
+    res.json(leaderboard);
   });
 });
 
