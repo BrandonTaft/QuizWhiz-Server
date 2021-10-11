@@ -133,9 +133,13 @@ app.get("/quiz", (req, res) => {
 
 //**************************Submit Score**************************//
 
-app.post("/api/submit", (req, res) => {
-  
-  
+app.post("/api/submit", async (req, res) => {
+  console.log(req.body.username)
+    let user = await models.Users.findOne({
+    where: {
+      name: userName
+    }
+  });
   
 })
 
