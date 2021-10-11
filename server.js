@@ -5,6 +5,7 @@ const app = express();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sequelize = require("sequelize");
+const axios = require('axios');
 
 const salt = 10;
 
