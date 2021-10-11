@@ -131,6 +131,16 @@ app.get("/quiz", (req, res) => {
   }
 });
 
+//**************************Submit Score**************************//
+
+app.post("/api/submit", (req, res) => {
+  
+  
+  
+})
+
+
+
 //**************************Server Hosting**************************//
 app.listen(8080, () => {
   console.log("Server is running...");
