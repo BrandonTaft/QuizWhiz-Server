@@ -99,12 +99,14 @@ app.get("/api/highscore", (req, res) => {
 
 //***************************Database connection***************************//
 
-app.get("/quiz/:category/", (req, res) => {
-  let category = req.params.category
+app.get("/quiz", (req, res) => {
+  let category = req.query["category"]
+  console.log(req.query["category"])
   axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=medium&type=multiple`)
-  .then(response => response.json)
+  .then(response => response.data)
   .then(result => {
     console.log(result)
+  
   })
 })
 
