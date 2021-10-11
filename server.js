@@ -100,7 +100,9 @@ app.get("/api/highscore", (req, res) => {
 //***************************Database connection***************************//
 
 app.get("/quiz/:category/", (req, res) => {
-  axios.get("")
+  axios.get(`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=medium&type=multiple`)
+  .then(response => response.json)
+  .then(result)
 })
 
 
