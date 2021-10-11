@@ -111,7 +111,7 @@ app.get("/quiz", (req, res) => {
   if (category == 100) {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple`
+        `https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple`
       )
       .then(response => response.data)
       .then(result => {
@@ -121,7 +121,7 @@ app.get("/quiz", (req, res) => {
   } else {
     axios
       .get(
-        `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=medium&type=multiple`
+        `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=easy&type=multiple`
       )
       .then(response => response.data)
       .then(result => {
@@ -130,6 +130,9 @@ app.get("/quiz", (req, res) => {
       });
   }
 });
+//**************************Delete user**************************//
+
+
 
 //**************************Submit Score**************************//
 
