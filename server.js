@@ -99,7 +99,9 @@ app.get("/api/highscore", (req, res) => {
 
 //***************************Database connection***************************//
 
-app.get("/quiz/:category/")
+app.get("/quiz/:category/", (req, res) => {
+  axios.get("")
+})
 
 
 
