@@ -96,6 +96,16 @@ app.get("/api/highscore", (req, res) => {
   });
 });
 
+//***************************Database connection***************************//
+
+app.get("/quiz/:category/")
+
+
+
+
+
+
+//**************************Server Hosting**************************//
 app.listen(8080, () => {
   console.log("Server is running...");
 });
