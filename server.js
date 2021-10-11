@@ -133,37 +133,12 @@ app.get("/quiz", (req, res) => {
 
 //**************************Submit Score**************************//
 
-app.post("/api/submit", async (req, res) => {
-  console.log(req.body.username);
-  let user = await models.Users.findOne({
-    where: {
-      name: req.body.username
-    }
-  });
-
-  if (user != null) {
-    user
-      .update(
-        { high_score: req.body.score },
-        {
-          where: {
-            name: req.body.username
-          }
-        }
-      )
-      .on("success", id => {
-        res.json(
-          {
-            success: true
-          },
-          200
-        );
-      })
-      .on("failure", error => {
-        throw new Error(error);
-      });
-  }
-});
+app.post("/api/submit", (req, res) => {
+  models.Users.update(req.body.username, {high_score: req.body.score})
+  .then((result) => {
+    console.log(result)
+  })
+})
 
 //**************************Server Hosting**************************//
 app.listen(8080, () => {
