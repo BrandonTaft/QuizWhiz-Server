@@ -64,7 +64,7 @@ app.post("/api/login", async (req, res) => {
   if (user != null) {
     bcrypt.compare(password, user.password, (error, result) => {
       if (result) {
-        const token = jwt.sign({ name: userName }, "SECRETKEY");
+        const token = jwt.sign({ name: userName }, process.env.JWT_SECRET_KEY);
         res.json({
           success: true,
           token: token,
