@@ -104,6 +104,20 @@ app.get("/api/highscore", (req, res) => {
   });
 });
 
+//***************************Users HIGH SCORE***************************//
+
+app.get("/api/userscore", (req, res) => {
+  let username = req.query["username"];
+  models.Users.findOne({
+    where: {
+      name: username
+    }
+  }).then(user_Score => {
+    console.log(user_Score)
+    })
+    res.json(username);
+});
+
 //***************************Get questions***************************//
 
 app.get("/quiz", (req, res) => {
