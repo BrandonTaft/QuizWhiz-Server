@@ -106,16 +106,16 @@ app.get("/api/highscore", (req, res) => {
 
 //***************************Users HIGH SCORE***************************//
 
-app.get("/api/userscore", (req, res) => {
+app.get("/api/userscore", async (req, res) => {
   let username = req.query["username"];
   let userScore = null
-  models.Users.findOne({
+  let score = await models.Users.findOne({
     where: {
       name: username
     }
   }).then(user_Score => {
-    console.log(user_Score["high_Score"])
-    userScore = user_Score["high_Score"]
+    console.log(user_Score["dataValues"]["high_score"])
+    userScore = user_Score["dataValues"]["high_score"]
     })
     res.json(userScore);
 });
