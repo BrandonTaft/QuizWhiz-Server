@@ -26,7 +26,7 @@ app.post("/api/register", async (req, res) => {
       name: userName
     }
   });
-
+  console.log("new user comin thru")
   if (persistedUser == null) {
     bcrypt.hash(password, salt, async (error, hash) => {
       console.log(hash);
@@ -108,14 +108,16 @@ app.get("/api/highscore", (req, res) => {
 
 app.get("/api/userscore", (req, res) => {
   let username = req.query["username"];
+  let userScore = null
   models.Users.findOne({
     where: {
       name: username
     }
   }).then(user_Score => {
-    console.log(user_Score)
+    console.log(user_Score["high_Score"])
+    userScore = user_Score["high_Score"]
     })
-    res.json(username);
+    res.json(userScore);
 });
 
 //***************************Get questions***************************//
